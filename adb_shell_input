@@ -1,0 +1,16 @@
+# Usage:
+# adbi hello                      - inputs the text
+# adbi hello enter                - inputs the text and sends a keycode enter event
+# adbi "multiple words"           - inputs a sentance 
+# adbi "multiple words" enter     - inputs a sentance and sends a keycode enter event
+
+alias adbi='function _adbi() {
+user_text=$(echo "$1" | sed -e '"'"'s/ /\\ /'"'"')
+adb shell input text $user_text;
+if [ "$2" == "enter" ];
+then
+        adb shell input keyevent 66
+fi
+
+};
+_adbi'
